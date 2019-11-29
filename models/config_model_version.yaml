@@ -1,0 +1,9 @@
+description: "SuperResolution model on 1 CPU"
+runtimeVersion: "1.13"
+pythonVersion: "3.5"
+framework: "TENSORFLOW"
+machineType: "mls1-c1-m2"
+autoScaling:
+  minNodes: 1
+labels:
+  "name": "super-resolution"

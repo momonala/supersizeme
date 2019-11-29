@@ -1,0 +1,45 @@
+openapi: "3.0.0"
+info:
+  description: "This is an API for upscaling low quality resolution images"
+  version: "0.1"
+  title: "SuperSizeMe"
+
+servers:
+  - url: "{protocol}://0.0.0.0:8080"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+
+paths:
+  /upscale:
+    post:
+      summary: API to upscale low resolution images
+      operationId: supersizeme.upscale_image_from_bytes
+      requestBody:
+        required: true
+        content:
+          image/png:
+            schema:
+              type: string
+              format: binary
+      responses:
+        200:
+          description: OK
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: "Invalid provider or format"
+        401:
+          description: "No courses found"
+        500:
+          description: "Internal Server Error"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
