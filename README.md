@@ -1,9 +1,9 @@
 # Super Size Me API
-Super Size Me is a super-resolution REST endpoint which increases the resolution of an input image.
+Super Size Me is a REST endpoint which doubles the resolution of an input image, will retaining perceptual quality.
 
 In the background, the API applies a computer vision model to mathematically analyze the visual contents of an image and learn an inverse compression algorithm, to upscale the image.
 
-TODO add funny picture of supersize me movei low and high res
+TODO add funny picture of supersize me movie low and high res
 
 # Installation
 
@@ -14,7 +14,7 @@ TODO host and download model
 
 # Endpoint
 
-`POST <HOST>/supersizeme/`: used to upsample an image.
+`POST <HOST>/supersizeme/` used to upsample an image.
 
 ### Body
 
@@ -60,7 +60,7 @@ Quality can be measured during the training process using a variety of different
 
 ## RDN Model
 
-The current implementation used in `ml-services` is an RDN (Residul Dense Network) based approach described in [the original paper here](https://arxiv.org/abs/1802.08797), and with a [pretrained model](https://github.com/idealo/image-super-resolution#rdn-network-architecture) from Idealo. See here for the [source code](https://github.com/idealo/image-super-resolution/blob/master/ISR/models/rdn.py).
+The current implementation is a RDN (Residul Dense Network) based approach described in [the original paper here](https://arxiv.org/abs/1802.08797), and with a [pretrained model](https://github.com/idealo/image-super-resolution#rdn-network-architecture) from Idealo. See here for the [source code](https://github.com/idealo/image-super-resolution/blob/master/ISR/models/rdn.py).
 
 The RDN model uses a stack of smaller building blocks called Residual Dense Blocks (RDB). RDBs are essentially a concatenation of several convolution+RELUs used to retain hierarchical features extracted at different stages of the network. 
 
