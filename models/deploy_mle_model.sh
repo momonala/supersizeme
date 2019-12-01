@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
+ACTION=$1
 PROJECT_NAME="ct-machine-learning"
-
 MODEL_NAME="SuperResolution"
 MODEL_VERSION="v1"
 MODEL_BINARIES="gs://ct-machine-learning-ml-models-ml-engine/models_mle/$MODEL_NAME/$MODEL_VERSION"
 
-ARG=$1
 
 ## create the model on ML Engine (only needed to run once)
-if [ "$ARG" = "create" ]; then
+if [ "$ACTION" = "create" ]; then
     gcloud ai-platform models create $MODEL_NAME \
     --regions europe-west1 \
     --project $PROJECT_NAME \
@@ -19,7 +18,7 @@ if [ "$ARG" = "create" ]; then
 fi
 
 ## list the models present on ML Engine
-if [ "$ARG" = "describe" ]; then
+if [ "$ACTION" = "describe" ]; then
     gcloud ai-platform models describe $MODEL_NAME \
     --project $PROJECT_NAME
 fi
@@ -27,7 +26,7 @@ fi
 ## create a new model version (instance) on ML Engine
 ## NOTE: this can only be run after model 'create' has been run once (above)
 ## NOTE: will not let you overwrite an existing version with the same version name (must delete the existing one)
-if [ "$ARG" = "version" ]; then
+if [ "$ACTION" = "version" ]; then
     gcloud ai-platform versions create $MODEL_VERSION \
     --project $PROJECT_NAME \
     --model $MODEL_NAME \

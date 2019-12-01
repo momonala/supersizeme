@@ -7,13 +7,10 @@ import numpy as np
 from PIL import Image
 from googleapiclient import discovery
 
-from values import MODEL_SOURCE
+from values import MODEL_SOURCE, SOCKET_TIME_OUT_IN_SEC, NAME_GOOGLE
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
-
-name_google = f'projects/ct-machine-learning/models/SuperResolution/versions/v1'
-SOCKET_TIME_OUT_IN_SEC = 1000
 
 
 def get_model_from_env():
@@ -84,7 +81,7 @@ class RDNModel(object):
 
         # perform mlengine prediction
         response = self.model.predict(
-            name=name_google,
+            name=NAME_GOOGLE,
             body={'instances': model_input}
         ).execute()
         layer_name = list(response['predictions'][0].keys())[0]
