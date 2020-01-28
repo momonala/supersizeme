@@ -26,8 +26,12 @@ def get_model_from_env():
 
 
 def get_local_rdn_model():
-    from keras.models import load_model
-    return load_model("models/rdn-C6-D20-G64-G064-x2_ArtefactCancelling_epoch219.h5")
+    from ISR.models import RDN
+    rdn = RDN(arch_params={"C": 6, "D": 20, "G": 64, "G0": 64, "x": 2})
+    rdn.model.load_weights(
+        "models/weights/rdn-C6-D20-G64-G064-x2_ArtefactCancelling_epoch219.hdf5"
+    )
+    return rdn
 
 
 def get_mlengine_rdn_model():
@@ -56,9 +60,12 @@ class RDNModel(object):
             np.ndarray: high resolution RGB image of data type np.uint8
         """
         img = Image.open(image_bytes)
-        low_res_img = np.expand_dims(np.array(img), axis=0)
+        low_res_img = np.array(img)
+        # low_res_img = np.expand_dims(np.array(img), axis=0)  # needed if using Keras.models.load_model
         high_res_img = self.model.predict(low_res_img)
-        return np.squeeze(high_res_img.astype(np.uint8), axis=0)
+        high_res_img = high_res_img.astype(np.uint8)
+        # high_res_img = np.squeeze(high_res_img, axis=0)  # needed if using Keras.models.load_model
+        return high_res_img
 
     def _predict_mlengine(self, image_bytes):
         """Upsample the image using Google ML Engine.

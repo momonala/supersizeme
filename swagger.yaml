@@ -34,12 +34,8 @@ paths:
                 type: string
                 format: binary
         400:
-          description: "Invalid provider or format"
+          description: "Bad Request."
         401:
-          description: "No courses found"
+          description: "Unauthorized."
         500:
           description: "Internal Server Error"
-
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
