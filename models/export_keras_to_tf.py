@@ -88,7 +88,7 @@ def export_keras_estimator(model_config: ModelConfig) -> None:
 
     export_path = os.path.join(ROOT_DIR, 'models_mle', model_config.name, model_config.version)
 
-    source = estimator.export_savedmodel(
+    source = estimator.export_saved_model(
         export_dir_base=export_path,
         serving_input_receiver_fn=partial(serving_input_receiver_fn_template, layer_name=model_config.input_layer_name),
     )

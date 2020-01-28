@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 ACTION=$1
+MODEL_VERSION=$2
 PROJECT_NAME="ct-machine-learning"
 MODEL_NAME="SuperResolution"
-MODEL_VERSION="v1"
 MODEL_BINARIES="gs://ct-machine-learning-ml-models-ml-engine/models_mle/$MODEL_NAME/$MODEL_VERSION"
 
 
