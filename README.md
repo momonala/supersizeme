@@ -1,17 +1,14 @@
 # Super Size Me API
 Super Size Me is a REST endpoint which doubles the resolution of an input image, will retaining perceptual quality.
 
-In the background, the API applies a computer vision model to mathematically analyze the visual contents of an image and learn an inverse compression algorithm, to upscale the image.
+![comparison](assets/compare.png "comparison")
 
-TODO add funny picture of supersize me movie low and high res
+In the background, the API applies a computer vision model to mathematically analyze the visual contents of an image and learn an inverse compression algorithm, to upscale the image.
 
 # Installation
 
     pip install -r requirements.txt
   
-#### Download RDN model  
-TODO host and download model
-
 # Endpoint
 
 `POST <HOST>/supersizeme/` used to upsample an image.
@@ -19,10 +16,6 @@ TODO host and download model
 ### Body
 
 The raw binary data of the image. Usually an uploaded image file.
-
-### Parameters
-
-Note: The maximum size for an image is 5MB.  Only `.png` and `.jpg/.jpeg` image file types are allowed.
  
  ## Examples
 
@@ -30,9 +23,10 @@ Note: The maximum size for an image is 5MB.  Only `.png` and `.jpg/.jpeg` image 
 
 ```
 curl -X POST \
-  "<HOST>/supersizeme \
+  http://0.0.0.0:8080/upscale \
   -H "Content-Type: image/<jpg or png>" \
-  --upload-file "<image_file>" \
+  --upload-file <file in> \
+  --output <file out>
 ```
 
 **Response**:
